@@ -1,0 +1,16 @@
+# Password Strength Checker 🔐
+
+This is my science fair project created by **Vullnet Grajçevci**.  
+It checks how strong your password is and gives suggestions to make it more secure.
+
+## Features
+- Rates password strength from Very Weak → Very Strong
+- Shows a progress bar with color coding
+- Suggests improvements for better security
+- Option to show/hide password
+
+## Live Website
+👉 [Click here to open](https://vullnetgrajqevci21.github.io/Password-Checker2-Testing/)
+
+## Author
+Made with dedication and discipline by **Vullnet Grajçevci**.
