@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Password Strength Checker</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #0d1b2a;
+      color: #e0e1dd;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #1b263b;
+      padding: 20px;
+      text-align: center;
+      color: #ffdd57;
+    }
+
+    main {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #1b263b;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    h1, h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    .checkbox-container {
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    #result {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    .bar {
+      height: 25px;
+      width: 100%;
+      background: #444;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
+    .fill {
+      height: 100%;
+      width: 0%;
+      background: red;
+      border-radius: 12px;
+      transition: width 0.3s;
+    }
+
+    #suggestion {
+      margin-top: 15px;
+      font-size: 16px;
+      color: #ffdd57;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #1b263b;
+      color: #aaa;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Password Strength Checker</h1>
+    <p>By Vullnet Grajçevci</p>
+  </header>
+
+  <main>
+    <h2>Test Your Password</h2>
+    <input type="password" id="password" placeholder="Enter your password" onkeyup="checkPassword()">
+    <div class="checkbox-container">
+      <label>
+        <input type="checkbox" onclick="togglePassword()"> Show Password
+      </label>
+    </div>
+    <div id="result"></div>
+    <div class="bar"><div class="fill" id="strengthBar"></div></div>
+    <div id="suggestion"></div>
+  </main>
+
+  <footer>
+    <p>Science Fair Project • bit.ly/4s8Cp0O</p>
+  </footer>
+
+  <script>
+    function togglePassword() {
+      const pwdField = document.getElementById("password");
+      pwdField.type = pwdField.type === "password" ? "text" : "password";
+    }
+
+    function checkPassword() {
+      const pwd = document.getElementById("password").value;
+      let score = 0;
+
+      if (pwd.length >= 8) score++;
+      if (/[A-Z]/.test(pwd)) score++;
+      if (/[a-z]/.test(pwd)) score++;
+      if (/[0-9]/.test(pwd)) score++;
+      if (/[^A-Za-z0-9]/.test(pwd)) score++;
+
+      let strength, barColor, suggestion;
+      let barWidth = (score / 5) * 100;
+
+      switch(score) {
+        case 0: case 1: 
+          strength = "Very Weak"; barColor = "red";
+          suggestion = "Make it longer and add numbers, symbols, and uppercase letters."; break;
+        case 2: 
+          strength = "Weak"; barColor = "orange";
+          suggestion = "Add uppercase letters, numbers, or symbols."; break;
+        case 3: 
+          strength = "Medium"; barColor = "yellow";
+          suggestion = "Pretty good, but add symbols or more length."; break;
+        case 4: 
+          strength = "Strong"; barColor = "lightgreen";
+          suggestion = "Strong password! Add one or two symbols for extra security."; break;
+        case 5: 
+          strength = "Very Strong"; barColor = "green";
+          suggestion = "Excellent password! Very secure."; break;
+      }
+
+      document.getElementById("result").innerText = "Strength: " + strength;
+      document.getElementById("strengthBar").style.width = barWidth + "%";
+      document.getElementById("strengthBar").style.background = barColor;
+      document.getElementById("suggestion").innerText = suggestion;
+    }
+  </script>
+</body>
+</html>
