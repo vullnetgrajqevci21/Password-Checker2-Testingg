@@ -20,15 +20,32 @@
     }
 
     main {
-      max-width: 600px;
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      max-width: 1000px;
       margin: 40px auto;
+      padding: 20px;
+    }
+
+    .checker, .suggestions {
       background: #1b263b;
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(0,0,0,0.5);
     }
 
-    h1, h2 {
+    .checker {
+      flex: 2;
+      max-width: 500px;
+    }
+
+    .suggestions {
+      flex: 1;
+      max-width: 300px;
+    }
+
+    h1, h2, h3 {
       margin-bottom: 20px;
     }
 
@@ -73,6 +90,12 @@
       color: #ffdd57;
     }
 
+    .suggestions ul {
+      text-align: left;
+      line-height: 1.6;
+      padding-left: 20px;
+    }
+
     footer {
       text-align: center;
       padding: 15px;
@@ -89,16 +112,29 @@
   </header>
 
   <main>
-    <h2>Test Your Password</h2>
-    <input type="password" id="password" placeholder="Enter your password" onkeyup="checkPassword()">
-    <div class="checkbox-container">
-      <label>
-        <input type="checkbox" onclick="togglePassword()"> Show Password
-      </label>
+    <!-- Left: Password Checker -->
+    <div class="checker">
+      <h2>Test Your Password</h2>
+      <input type="password" id="password" placeholder="Enter your password" onkeyup="checkPassword()">
+      <div class="checkbox-container">
+        <label><input type="checkbox" onclick="togglePassword()"> Show Password</label>
+      </div>
+      <div id="result"></div>
+      <div class="bar"><div class="fill" id="strengthBar"></div></div>
+      <div id="suggestion"></div>
     </div>
-    <div id="result"></div>
-    <div class="bar"><div class="fill" id="strengthBar"></div></div>
-    <div id="suggestion"></div>
+
+    <!-- Right: Suggestions -->
+    <div class="suggestions">
+      <h3 style="color:#ffdd57;">Password Tips</h3>
+      <ul>
+        <li>Use at least 12 characters</li>
+        <li>Mix uppercase and lowercase letters</li>
+        <li>Include numbers and symbols</li>
+        <li>Avoid common words (like "football")</li>
+        <li>Don’t reuse old passwords</li>
+      </ul>
+    </div>
   </main>
 
   <footer>
